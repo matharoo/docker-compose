@@ -1,0 +1,26 @@
+version: '3'
+services:
+  reactapp:
+    image: node:12.2.0-alpine
+    build: ./reactapp
+    command: sh -c "npm install && npm start"
+    environment:
+      - NODE_ENV=development
+      - PORT=3000
+    ports:
+      - '3000:3000'
+    working_dir: /root/reactapp
+    volumes:
+      - ./reactapp:/root/reactapp:cached
+  api:
+    image: node:10
+    build: ./api
+    command: sh -c "npm install && npm start"
+    environment:
+      - NODE_ENV=development
+      - PORT=3001
+    ports:
+      - '3001:3001'
+    working_dir: /root/api
+    volumes:
+      - ./api:/root/api:cached
